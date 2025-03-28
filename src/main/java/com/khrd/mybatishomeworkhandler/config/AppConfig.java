@@ -12,7 +12,7 @@ public class AppConfig {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource source = new DriverManagerDataSource();
-        source.setUrl("jdbc:postgresql://localhost:5432/product");
+        source.setUrl("jdbc:postgresql://localhost:5432/event_management");
         source.setUsername("nyfong");
         source.setPassword("fongfong");
         return source;
