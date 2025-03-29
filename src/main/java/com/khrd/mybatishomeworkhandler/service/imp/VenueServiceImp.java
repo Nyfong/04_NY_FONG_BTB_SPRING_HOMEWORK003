@@ -31,4 +31,22 @@ public class VenueServiceImp implements VenueService {
     public Venue createVenue(VenueRequest venueRequest) {
         return venueRepo.createVenue(venueRequest);
     }
+
+    @Override
+    public List<Venue> editVenueById(Integer venueId, VenueRequest venueRequest) {
+        if(venueRepo.countCourseService(venueId)>0) {
+            return venueRepo.editVenueById(venueId, venueRequest);
+        }
+        throw new NotFoundExceptionHandler("venue with id : "+venueId+" Not Found");
+    }
+
+    @Override
+    public Integer deleteVenueById(Integer venueId) {
+
+        if(venueRepo.countCourseService(venueId)>0) {
+            return venueRepo.deleteVenueById(venueId);
+        }
+
+        throw new NotFoundExceptionHandler("venue with id : "+venueId+" Not Found");
+    }
 }

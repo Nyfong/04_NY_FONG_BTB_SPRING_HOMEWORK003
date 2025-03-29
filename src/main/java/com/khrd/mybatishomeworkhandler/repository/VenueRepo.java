@@ -25,14 +25,24 @@ public interface VenueRepo {
 
 
     // --
-    @Select("INSERT INTO venues (venue_name, location) VALUES ()")
+    @Select("INSERT INTO venues VALUES (default,#{venueName}, #{location}) returning * ;")
     @ResultMap("venueMapper")
     Venue createVenue(VenueRequest venueRequest);
 
 
+    //-- edit venue Id
+    @Select("update venues set venue_name = #{Venue.venueName}, location=#{Venue.location}   where  venue_id = #{venueId} returning *;  ")
+    @ResultMap("venueMapper")
+    List<Venue> editVenueById(Integer venueId, @Param("Venue") VenueRequest venueRequest);
+
+    // -- delete by Id
+    @Select("delete from venues where  venue_id = #{venueId} returning *;")
+    Integer deleteVenueById(Integer venueId);
+
     // addition
     @Select("select COUNT(*) from  venues where  venue_id = #{venueId};")
     Integer countCourseService(Integer venueId);
+
 
 
 }

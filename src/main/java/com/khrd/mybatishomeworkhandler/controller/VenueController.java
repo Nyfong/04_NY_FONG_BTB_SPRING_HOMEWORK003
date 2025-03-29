@@ -30,7 +30,7 @@ public class VenueController {
     @GetMapping("/")
     public ResponseEntity<?> getAllCourses(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
         List<Venue> getAllVenue = venueService.getAllVenueService(page,size);
-        ApiResponse<List<Venue>> response = ApiResponse.<List<Venue>>builder().timestamp(LocalDateTime.now()).message("retrive all course").status(HttpStatus.OK).payload(getAllVenue).build();
+        ApiResponse<List<Venue>> response = ApiResponse.<List<Venue>>builder().timestamp(LocalDateTime.now()).message("retrive all venue").status(HttpStatus.OK).payload(getAllVenue).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -40,7 +40,7 @@ public class VenueController {
     public ResponseEntity<?> getVenuesById(@PathVariable("venue-id") Integer venueId) {
 
         Venue venueById = venueService.getvenueById(venueId);
-        ApiResponse<?> response = ApiResponse.<Venue>builder().timestamp(LocalDateTime.now()).message("retrive  instructors by Id").status(HttpStatus.OK).payload(venueById).build();
+        ApiResponse<?> response = ApiResponse.<Venue>builder().timestamp(LocalDateTime.now()).message("retrive  venue by Id").status(HttpStatus.OK).payload(venueById).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -49,9 +49,27 @@ public class VenueController {
     @PostMapping
     public ResponseEntity<ApiResponse<Venue>> createVenue(@RequestBody VenueRequest venueRequest) {
         Venue createVenue = venueService.createVenue(venueRequest);
-        ApiResponse<Venue> response = ApiResponse.<Venue>builder().timestamp(LocalDateTime.now()).message("sucesfully create instructors ").payload(createVenue).status(HttpStatus.CREATED).build();
+        ApiResponse<Venue> response = ApiResponse.<Venue>builder().timestamp(LocalDateTime.now()).message("sucesfully create venue ").payload(createVenue).status(HttpStatus.CREATED).build();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
+    }
+
+    // Put
+    @Operation(summary = "Edit  Venues By Id")
+    @PutMapping("/{venue-id}")
+    public ResponseEntity<ApiResponse<List<Venue>>> editVenueById(@PathVariable("venue-id")Integer venueId, @RequestBody VenueRequest venueRequest ) {
+        List<Venue> editVenueById = venueService.editVenueById(venueId, venueRequest);
+        ApiResponse<List<Venue>> response = ApiResponse.<List<Venue>>builder().timestamp(LocalDateTime.now()).message("sucesfully edit venue ").status(HttpStatus.OK).build();
+        return  new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+  // delete by Id
+    @Operation(summary = "Delete  Venues By Id")
+    @DeleteMapping("/{venue-id}")
+    public ResponseEntity<ApiResponse<Integer>> deleteVenueById(@PathVariable("venue-id")Integer venueId) {
+        Integer deleteVenueById = venueService.deleteVenueById(venueId);
+        ApiResponse<Integer> response = ApiResponse.<Integer>builder().timestamp(LocalDateTime.now()).message("sucesfully delete venue ").status(HttpStatus.OK).build();
+        return  new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

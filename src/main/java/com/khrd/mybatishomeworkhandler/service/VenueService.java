@@ -11,4 +11,8 @@ public interface VenueService {
     Venue getvenueById(Integer venueId);
 
     Venue createVenue(VenueRequest venueRequest);
+
+    List<Venue> editVenueById(Integer venueId, VenueRequest venueRequest);
+
+    Integer deleteVenueById(Integer venueId);
 }
