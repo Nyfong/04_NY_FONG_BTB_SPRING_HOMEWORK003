@@ -56,9 +56,9 @@ public class VenueController {
     // Put
     @Operation(summary = "Edit  Venues By Id")
     @PutMapping("/{venue-id}")
-    public ResponseEntity<ApiResponse<List<Venue>>> editVenueById(@PathVariable("venue-id")Integer venueId, @RequestBody VenueRequest venueRequest ) {
-        List<Venue> editVenueById = venueService.editVenueById(venueId, venueRequest);
-        ApiResponse<List<Venue>> response = ApiResponse.<List<Venue>>builder().timestamp(LocalDateTime.now()).message("sucesfully edit venue ").status(HttpStatus.OK).build();
+    public ResponseEntity<ApiResponse<?>> editVenueById(@PathVariable("venue-id")Integer venueId, @RequestBody VenueRequest venueRequest ) {
+        Venue editVenueById = venueService.editVenueById(venueId, venueRequest);
+        ApiResponse<?> response = ApiResponse.<Venue>builder().timestamp(LocalDateTime.now()).message("sucesfully edit venue ").status(HttpStatus.OK).build();
         return  new ResponseEntity<>(response, HttpStatus.OK);
     }
 

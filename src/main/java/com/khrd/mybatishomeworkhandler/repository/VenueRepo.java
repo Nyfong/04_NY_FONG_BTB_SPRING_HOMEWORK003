@@ -33,7 +33,7 @@ public interface VenueRepo {
     //-- edit venue Id
     @Select("update venues set venue_name = #{Venue.venueName}, location=#{Venue.location}   where  venue_id = #{venueId} returning *;  ")
     @ResultMap("venueMapper")
-    List<Venue> editVenueById(Integer venueId, @Param("Venue") VenueRequest venueRequest);
+    Venue editVenueById(Integer venueId, @Param("Venue") VenueRequest venueRequest);
 
     // -- delete by Id
     @Select("delete from venues where  venue_id = #{venueId} returning *;")
@@ -45,8 +45,16 @@ public interface VenueRepo {
 
 
     // find latest method
-    @Select("SELECT MAX(venue_id) FROM venues;")
+    @Select("SELECT COUNT(*) FROM venues;")
     Integer findLatestVenueId();
+
+
+    // middle table
+    @ResultMap("venueMapper")
+    @Select("""
+           
+            """)
+    List<Venue> getMIddleTableByStudentId(Integer venueId);
 
 
 }

@@ -21,9 +21,13 @@ public class VenueServiceImp implements VenueService {
         if (  size <=0 || page <= 0) {
             //System.out.println("a");
             throw new NotFoundExceptionHandler("must be greater than 0 ");
-        } else if (venueRepo.findLatestVenueId()<size) {
+        }
+
+        else if (venueRepo.findLatestVenueId()<size) {
+            System.out.println(size);
             throw new NotFoundExceptionHandler("Invalid size:) ");
         }
+
         return venueRepo.getAllVenue(page, size);
     }
 
@@ -51,7 +55,7 @@ public class VenueServiceImp implements VenueService {
     }
 
     @Override
-    public List<Venue> editVenueById(Integer venueId, VenueRequest venueRequest) {
+    public Venue editVenueById(Integer venueId, VenueRequest venueRequest) {
         if (venueRepo.countVenueService(venueId) > 0) {
             return venueRepo.editVenueById(venueId, venueRequest);
         }

@@ -12,7 +12,7 @@ public interface VenueService {
 
     Venue createVenue(VenueRequest venueRequest);
 
-    List<Venue> editVenueById(Integer venueId, VenueRequest venueRequest);
+    Venue editVenueById(Integer venueId, VenueRequest venueRequest);
 
     Integer deleteVenueById(Integer venueId);
 }

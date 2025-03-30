@@ -6,4 +6,8 @@ import java.util.List;
 
 public interface EventService {
     List<Event> getAllEventService(Integer page, Integer size);
+
+    Event getEventById(Integer eventId);
+
+    Event deleteEventById(Integer eventId);
 }
