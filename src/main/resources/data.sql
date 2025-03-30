@@ -21,5 +21,5 @@ create  table events(
 create  table event_attendee(
     id serial primary key ,
     event_id  int references  events(event_id) ON  DELETE CASCADE ,
-    venue_id int references venues(venue_id)  ON DELETE  CASCADE
+    attendee_id int references attendees(attendee_id)  ON DELETE  CASCADE
 );
