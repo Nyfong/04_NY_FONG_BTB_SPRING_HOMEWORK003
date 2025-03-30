@@ -26,13 +26,22 @@ public class EventServiceImp implements EventService {
 
     @Override
     public Event getEventById(Integer eventId) {
-        return eventRepo.getEventServiceById(eventId);
+        if (eventId != null &&  eventRepo.findTheEvent(eventId) > 0) {
+            return eventRepo.getEventServiceById(eventId);
+        }
+        if(eventId > 0){
+            throw new NotFoundExceptionHandler("event with id must greater than 0");
+        }
+        throw new NotFoundExceptionHandler("event with id : " + eventId + " Not Found");
     }
 
     @Override
     public Event deleteEventById(Integer eventId) {
         if(eventRepo.findTheEvent(eventId) > 0){
             return eventRepo.deleteEventById(eventId);
+        }
+        if(eventId > 0){
+            throw new NotFoundExceptionHandler("event with id must greater than 0");
         }
         throw new NotFoundExceptionHandler("event with id : " + eventId + " Not Found");
     }
@@ -41,5 +50,11 @@ public class EventServiceImp implements EventService {
     public Event createEvent(EventRequestV1 eventRequestV1) {
         return eventRepo.createEvent(eventRequestV1);
     }
+
+    @Override
+    public Event editEventById(Integer eventId, EventRequestV1 eventRequestV1) {
+        return null;
+    }
+
 
 }

@@ -60,9 +60,23 @@ public class EventController {
     @Operation(summary = "Create  Event ")
     @PostMapping
     public ResponseEntity<?> createEvent(@RequestBody EventRequestV1 eventRequestV1) {
-        Event createEvent = eventService.createEvent(eventRequestV1);
-        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("delete event by id").payload(createEvent).status(HttpStatus.OK).time(LocalDateTime.now()).build();
+        Event createdEvent = eventService.createEvent(eventRequestV1);
+        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder()
+                .message("The event has been successfully added.")
+                .payload(createdEvent)
+                .status(HttpStatus.CREATED) // Use CREATED status code (201)
+                .time(LocalDateTime.now())
+                .build();
         return new ResponseEntity<>(response, HttpStatus.CREATED);
 
+    }
+
+    // Put
+    @Operation(summary = "Edit  Event By Id")
+    @PutMapping("/{event-id}")
+    public ResponseEntity<ApiResponse<?>> editVenueById(@PathVariable("event-id")Integer eventId, @RequestBody  EventRequestV1 eventRequestV1 ) {
+        Event editEventById = eventService.editEventById(eventId, eventRequestV1);
+        ApiResponse<?> response = ApiResponse.<Event>builder().timestamp(LocalDateTime.now()).message("sucesfully edit Event ").status(HttpStatus.OK).build();
+        return  new ResponseEntity<>(response, HttpStatus.OK);
     }
 }
