@@ -6,6 +6,7 @@ import com.khrd.mybatishomeworkhandler.model.dto.respone.ApiResponse;
 import com.khrd.mybatishomeworkhandler.model.entity.Venue;
 import com.khrd.mybatishomeworkhandler.service.VenueService;
 import io.swagger.v3.oas.annotations.Operation;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +15,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/venues")
+
 public class VenueController {
-
-
     //Di
-
     private VenueService venueService;
     public VenueController(VenueService venueService) {
         this.venueService = venueService;
@@ -28,7 +27,7 @@ public class VenueController {
     //get all courses
     @Operation(summary = "Get All venues")
     @GetMapping("/")
-    public ResponseEntity<?> getAllCourses(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
+    public ResponseEntity<?> getAllVenue(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
         List<Venue> getAllVenue = venueService.getAllVenueService(page,size);
         ApiResponse<List<Venue>> response = ApiResponse.<List<Venue>>builder().timestamp(LocalDateTime.now()).message("retrive all venue").status(HttpStatus.OK).payload(getAllVenue).build();
         return new ResponseEntity<>(response, HttpStatus.OK);

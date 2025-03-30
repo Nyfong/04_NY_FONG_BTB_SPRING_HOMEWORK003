@@ -1,4 +1,4 @@
-```
+
 create table attendees(
     attendee_id serial primary key ,
     attendee_name varchar(150),
@@ -14,8 +14,8 @@ create  table venues(
 create  table events(
     event_id serial primary key ,
     event_name varchar(150),
-     venue_id int references venues(venue_id)  ON DELETE  CASCADE,
-     event_date DATE
+    event_date DATE,
+     venue_id int references venues(venue_id)  ON DELETE  CASCADE
 );
 
 create  table event_attendee(
@@ -23,4 +23,3 @@ create  table event_attendee(
     event_id  int references  events(event_id) ON  DELETE CASCADE ,
     venue_id int references venues(venue_id)  ON DELETE  CASCADE
 );
-```

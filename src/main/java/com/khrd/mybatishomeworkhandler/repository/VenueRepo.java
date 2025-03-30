@@ -41,8 +41,12 @@ public interface VenueRepo {
 
     // addition
     @Select("select COUNT(*) from  venues where  venue_id = #{venueId};")
-    Integer countCourseService(Integer venueId);
+    Integer countVenueService(Integer venueId);
 
+
+    // find latest method
+    @Select("SELECT MAX(venue_id) FROM venues;")
+    Integer findLatestVenueId();
 
 
 }
