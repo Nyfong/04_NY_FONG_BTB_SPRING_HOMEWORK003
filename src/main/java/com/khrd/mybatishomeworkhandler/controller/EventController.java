@@ -1,6 +1,9 @@
 package com.khrd.mybatishomeworkhandler.controller;
 
 
+import com.khrd.mybatishomeworkhandler.model.dto.request.EventRequest;
+import com.khrd.mybatishomeworkhandler.model.dto.request.EventRequestV1;
+import com.khrd.mybatishomeworkhandler.model.dto.request.VenueRequest;
 import com.khrd.mybatishomeworkhandler.model.dto.respone.ApiEventRespone;
 import com.khrd.mybatishomeworkhandler.model.dto.respone.ApiResponse;
 import com.khrd.mybatishomeworkhandler.model.entity.Attendee;
@@ -51,5 +54,15 @@ public class EventController {
         Event deleteEventById = eventService.deleteEventById(eventId);
         ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("delete event by id").payload(deleteEventById).status(HttpStatus.OK).time(LocalDateTime.now()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    //post
+    @Operation(summary = "Create  Event ")
+    @PostMapping
+    public ResponseEntity<?> createEvent(@RequestBody EventRequestV1 eventRequestV1) {
+        Event createEvent = eventService.createEvent(eventRequestV1);
+        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("delete event by id").payload(createEvent).status(HttpStatus.OK).time(LocalDateTime.now()).build();
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
+
     }
 }

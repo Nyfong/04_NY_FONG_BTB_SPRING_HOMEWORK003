@@ -1,6 +1,8 @@
 package com.khrd.mybatishomeworkhandler.service.imp;
 
 import com.khrd.mybatishomeworkhandler.exception.NotFoundExceptionHandler;
+import com.khrd.mybatishomeworkhandler.model.dto.request.EventRequest;
+import com.khrd.mybatishomeworkhandler.model.dto.request.EventRequestV1;
 import com.khrd.mybatishomeworkhandler.model.entity.Event;
 import com.khrd.mybatishomeworkhandler.repository.EventRepo;
 import com.khrd.mybatishomeworkhandler.service.EventService;
@@ -34,4 +36,10 @@ public class EventServiceImp implements EventService {
         }
         throw new NotFoundExceptionHandler("event with id : " + eventId + " Not Found");
     }
+
+    @Override
+    public Event createEvent(EventRequestV1 eventRequestV1) {
+        return eventRepo.createEvent(eventRequestV1);
+    }
+
 }

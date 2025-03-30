@@ -1,6 +1,8 @@
 package com.khrd.mybatishomeworkhandler.repository;
 
 
+import com.khrd.mybatishomeworkhandler.model.dto.request.EventRequest;
+import com.khrd.mybatishomeworkhandler.model.dto.request.EventRequestV1;
 import com.khrd.mybatishomeworkhandler.model.entity.Attendee;
 import com.khrd.mybatishomeworkhandler.model.entity.Event;
 import org.apache.ibatis.annotations.*;
@@ -34,18 +36,26 @@ public  interface  EventRepo {
     })
     List<Attendee> getAttendeesByEventId(@Param("eventId") int eventId);
 
+    //--
     @Select(" select * from events where event_id = #{eventId}")
     @ResultMap("eventMapper")
     Event getEventServiceById(Integer eventId);
-
+    // --
 
     @Select(" delete from events where event_id = #{eventId}")
     @ResultMap("eventMapper")
     Event deleteEventById(Integer eventId);
+    //-- create
+    @Select("""
+        INSERT INTO events(event_name, venue_id, event_date)
+        VALUES(#{eventName}, #{venueId}, #{date})
+        RETURNING *;
+        """)
+    @ResultMap("eventMapper")
+    Event createEvent(EventRequestV1 eventRequestV1);
 //    // addition
     @Select("SELECT COUNT(*) FROM event_attendee  where  event_id = #{eventId};")
     Integer findTheEvent(Integer eventId);
-
 
 
 
