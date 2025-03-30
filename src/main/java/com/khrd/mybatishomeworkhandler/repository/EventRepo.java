@@ -42,19 +42,23 @@ public  interface  EventRepo {
     Event getEventServiceById(Integer eventId);
     // --
 
-    @Select(" delete from events where event_id = #{eventId}")
+    @Select(" delete  from events where event_id =  #{eventId};")
     @ResultMap("eventMapper")
     Event deleteEventById(Integer eventId);
     //-- create
     @Select("""
         INSERT INTO events(event_name, venue_id, event_date)
         VALUES(#{eventName}, #{venueId}, #{date})
-        RETURNING *;
+        RETURNING  event_id;
         """)
     @ResultMap("eventMapper")
     Event createEvent(EventRequestV1 eventRequestV1);
+
+
+
+
 //    // addition
-    @Select("SELECT COUNT(*) FROM event_attendee  where  event_id = #{eventId};")
+    @Select("SELECT COUNT(*) FROM events  where  event_id = #{eventId};")
     Integer findTheEvent(Integer eventId);
 
     //-- edit
