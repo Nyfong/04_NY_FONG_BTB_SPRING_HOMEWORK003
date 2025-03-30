@@ -40,7 +40,7 @@ public class EventServiceImp implements EventService {
         if(eventRepo.findTheEvent(eventId) > 0){
             return eventRepo.deleteEventById(eventId);
         }
-        if(eventId > 0){
+        if(eventId < 0){
             throw new NotFoundExceptionHandler("event with id must greater than 0");
         }
         throw new NotFoundExceptionHandler("event with id : " + eventId + " Not Found");
@@ -53,7 +53,13 @@ public class EventServiceImp implements EventService {
 
     @Override
     public Event editEventById(Integer eventId, EventRequestV1 eventRequestV1) {
-        return null;
+        if(eventRepo.findTheEvent(eventId) > 0){
+            return eventRepo.EditEventById(eventId,eventRequestV1);
+        }
+        if(eventId < 0){
+            throw new NotFoundExceptionHandler("event with id must greater than 0");
+        }
+        throw new NotFoundExceptionHandler("event with id : " + eventId + " Not Found");
     }
 
 

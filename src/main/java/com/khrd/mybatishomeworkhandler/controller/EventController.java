@@ -33,7 +33,7 @@ public class EventController {
     @GetMapping("/")
     public ResponseEntity<?> getAllEvent(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "3") Integer size) {
         List<Event> getAllEvent = eventService.getAllEventService(page,size);
-        ApiEventRespone<List<Event>> response = ApiEventRespone.<List<Event>>builder().message("retrive all event ").payload(getAllEvent).status(HttpStatus.OK).time(LocalDateTime.now()).build();
+        ApiEventRespone<List<Event>> response = ApiEventRespone.<List<Event>>builder().message("retrive all event successfully").payload(getAllEvent).status(HttpStatus.OK).time(LocalDateTime.now()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     //get by id
@@ -42,7 +42,7 @@ public class EventController {
     public ResponseEntity<?> getEventById(@PathVariable("event-id") Integer eventId) {
 
         Event eventById = eventService.getEventById(eventId);
-        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("retrive event by id").payload(eventById).status(HttpStatus.OK).time(LocalDateTime.now()).build();
+        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("retrive event by id successfully").payload(eventById).status(HttpStatus.OK).time(LocalDateTime.now()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -52,7 +52,7 @@ public class EventController {
     public ResponseEntity<?> deleteEventById(@PathVariable("event-id") Integer eventId) {
 
         Event deleteEventById = eventService.deleteEventById(eventId);
-        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("delete event by id").payload(deleteEventById).status(HttpStatus.OK).time(LocalDateTime.now()).build();
+        ApiEventRespone<Event> response = ApiEventRespone.<Event>builder().message("delete event by id successfully ").payload(deleteEventById).status(HttpStatus.OK).time(LocalDateTime.now()).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

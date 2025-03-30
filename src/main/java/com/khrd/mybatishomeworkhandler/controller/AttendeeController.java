@@ -39,7 +39,7 @@ public class AttendeeController {
     public ResponseEntity<?> getAttendeeById(@PathVariable("attendee-id") Integer attendeeId) {
 
         Attendee attendeeById = attendeeService.getAttendeeById(attendeeId);
-        ApiResponse<?> response = ApiResponse.<Attendee>builder().timestamp(LocalDateTime.now()).message("retrive  venue by Id").status(HttpStatus.OK).payload(attendeeById).build();
+        ApiResponse<?> response = ApiResponse.<Attendee>builder().timestamp(LocalDateTime.now()).message("retrive  venue by Id successfully").status(HttpStatus.OK).payload(attendeeById).build();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     //post

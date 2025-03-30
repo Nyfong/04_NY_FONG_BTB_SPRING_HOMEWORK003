@@ -57,6 +57,10 @@ public  interface  EventRepo {
     @Select("SELECT COUNT(*) FROM event_attendee  where  event_id = #{eventId};")
     Integer findTheEvent(Integer eventId);
 
-
-
+    //-- edit
+    @Select("""
+        update  events set event_name = #{event.eventName}, venue_id = #{event.venueId}, event_date = #{event.date} where event_id = #{eventId};
+        """)
+    @ResultMap("eventMapper")
+    Event EditEventById(Integer eventId, @Param("event") EventRequestV1 eventRequestV1);
 }
